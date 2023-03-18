@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.attendance_tracker">
+    package="rocks.outdatedguy.zoom_attendance_tracker">
    <application
-        android:label="attendance_tracker"
+        android:label="Zoom Attendance Tracker"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
