@@ -36,6 +36,15 @@ List<String> getLateParticipants({
   final joinTimeColumnIndex = parsedCsv[0].indexOf('Join Time');
   final waitRoomColumnIndex = parsedCsv[0].indexOf('In Waiting Room');
 
+  if (nameColumnIndex == -1 ||
+      joinTimeColumnIndex == -1 ||
+      waitRoomColumnIndex == -1) {
+    throw Exception(
+      'Invalid CSV file. Please make sure that the CSV file contains the following columns: '
+      '"Name (Original Name)", "Join Time", "In Waiting Room"',
+    );
+  }
+
   parsedCsv.removeAt(0);
 
   final waitingRoomData = parsedCsv

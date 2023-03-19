@@ -167,21 +167,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getLateParticipants() {
-    final lateParticipants = getLateParticipants(
-      fileData: _fileData!,
-      filterDateTime: _filterDateTime,
-    );
+    try {
+      final lateParticipants = getLateParticipants(
+        fileData: _fileData!,
+        filterDateTime: _filterDateTime,
+      );
 
-    // Show a dialog with the late participants
-    // Keep the dialog open until the user closes it
-    // The dialog should have a button to copy the list of late participants
-    showDialog(
-      context: context,
-      builder: (context) => LateParticipantsDialog(
-        lateParticipants: lateParticipants,
-      ),
-      barrierDismissible: false,
-    );
+      // Show a dialog with the late participants
+      // Keep the dialog open until the user closes it
+      // The dialog should have a button to copy the list of late participants
+      showDialog(
+        context: context,
+        builder: (context) => LateParticipantsDialog(
+          lateParticipants: lateParticipants,
+        ),
+        barrierDismissible: false,
+      );
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString().split('Exception: ')[1],
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 6),
+        ),
+      );
+    }
   }
 
   @override
