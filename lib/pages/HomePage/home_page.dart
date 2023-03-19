@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () async {
                     final pickedDate = await showDatePicker(
                       context: context,
-                      initialDate: DateTime.now(),
+                      initialDate: _filterDateTime,
                       firstDate: DateTime(0000),
                       lastDate: DateTime(9999),
                     );
@@ -141,7 +141,10 @@ class _HomePageState extends State<HomePage> {
                   readOnly: true,
                   onTap: () async {
                     TimeOfDay? pickedTime = await showTimePicker(
-                      initialTime: const TimeOfDay(hour: 5, minute: 2),
+                      initialTime: TimeOfDay(
+                        hour: _filterDateTime.hour,
+                        minute: _filterDateTime.minute,
+                      ),
                       context: context,
                     );
 
