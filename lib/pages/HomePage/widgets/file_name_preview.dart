@@ -23,7 +23,11 @@ class FileNamePreview extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.8,
         constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
-        color: filePath != null ? Colors.black87 : null,
+        color: filePath != null
+            ? Theme.of(context).brightness == Brightness.dark
+                ? Colors.black87
+                : Colors.white70
+            : null,
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: Center(
@@ -38,7 +42,10 @@ class FileNamePreview extends StatelessWidget {
                       Icon(Icons.file_download_outlined),
                     ],
                   )
-                : Text(filePath!.split(RegExp(r'[/\\]')).last),
+                : Text(
+                    filePath!.split(RegExp(r'[/\\]')).last,
+                    textAlign: TextAlign.center,
+                  ),
           ),
         ),
       ),
