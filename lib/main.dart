@@ -12,7 +12,7 @@ import 'package:window_size/window_size.dart';
 // Pages
 import 'package:attendance_tracker/pages/HomePage/home_page.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
     FlutterNativeSplash.remove();
   });
@@ -20,6 +20,16 @@ void main() {
   if (!kIsWeb) {
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       setWindowMinSize(const Size(400, 800));
+      // Get device screen size
+      final desktopSize = (await getCurrentScreen())?.visibleFrame;
+      setWindowFrame(Rect.fromCenter(
+        center: Offset(
+          (desktopSize?.width ?? 1920) / 2,
+          (desktopSize?.height ?? 1080) / 2,
+        ),
+        width: 1080,
+        height: 800,
+      ));
     }
   }
 
