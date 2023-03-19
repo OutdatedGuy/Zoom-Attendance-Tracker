@@ -20,18 +20,26 @@ class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
     return AlertDialog(
       scrollable: true,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Late Participants'),
-          const Spacer(),
+          const Flexible(
+            child: Text(
+              'Late Participants',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
           IconButton(
             onPressed: Navigator.of(context).pop,
             icon: const Icon(Icons.close),
           ),
         ],
       ),
-      content: Text(
-        widget.lateParticipants.map((e) => '• $e').join('\n'),
-        style: const TextStyle(fontSize: 16),
+      content: SizedBox(
+        width: 350,
+        child: SelectableText(
+          widget.lateParticipants.map((e) => '• $e').join('\n'),
+          style: const TextStyle(fontSize: 16),
+        ),
       ),
       actions: [
         TextButton(
@@ -44,6 +52,7 @@ class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
             if (!mounted) return;
 
             // Show a snackbar to notify the user that the list has been copied
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Copied to clipboard'),
