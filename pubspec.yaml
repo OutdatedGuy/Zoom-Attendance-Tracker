@@ -37,6 +37,12 @@ dependencies:
   csv: ^5.0.1
   flutter_native_splash: ^2.2.19
 
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      ref: main
+      path: plugins/window_size
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
