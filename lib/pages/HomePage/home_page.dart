@@ -92,74 +92,77 @@ class _HomePageState extends State<HomePage> {
             onPressed: _selectFile,
             child: const Text('Select File'),
           ),
-          const SizedBox(height: 35),
           const SizedBox(height: 60),
-          Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 50,
-            runSpacing: 50,
-            children: [
-              SizedBox(
-                width: 300,
-                child: TextField(
-                  controller: _dateController,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.date_range),
-                    labelText: "Enter Date",
-                    border: OutlineInputBorder(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 50,
+              runSpacing: 50,
+              children: [
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: _dateController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.date_range),
+                      labelText: "Enter Date",
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: _filterDateTime,
+                        firstDate: DateTime(0000),
+                        lastDate: DateTime(9999),
+                      );
+
+                      if (pickedDate == null) return;
+
+                      _filterDateTime = _filterDateTime.copyWith(
+                        year: pickedDate.year,
+                        month: pickedDate.month,
+                        day: pickedDate.day,
+                      );
+                      _dateController.text =
+                          pickedDate.toString().split(' ')[0];
+                    },
                   ),
-                  readOnly: true,
-                  onTap: () async {
-                    final pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: _filterDateTime,
-                      firstDate: DateTime(0000),
-                      lastDate: DateTime(9999),
-                    );
-
-                    if (pickedDate == null) return;
-
-                    _filterDateTime = _filterDateTime.copyWith(
-                      year: pickedDate.year,
-                      month: pickedDate.month,
-                      day: pickedDate.day,
-                    );
-                    _dateController.text = pickedDate.toString().split(' ')[0];
-                  },
                 ),
-              ),
-              SizedBox(
-                width: 300,
-                child: TextField(
-                  controller: _timeController,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.timer),
-                    labelText: "Enter Time",
-                    border: OutlineInputBorder(),
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: _timeController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.timer),
+                      labelText: "Enter Time",
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      TimeOfDay? pickedTime = await showTimePicker(
+                        initialTime: TimeOfDay(
+                          hour: _filterDateTime.hour,
+                          minute: _filterDateTime.minute,
+                        ),
+                        context: context,
+                      );
+
+                      if (pickedTime == null) return;
+                      if (!mounted) return;
+
+                      _filterDateTime = _filterDateTime.copyWith(
+                        hour: pickedTime.hour,
+                        minute: pickedTime.minute,
+                      );
+                      _timeController.text = pickedTime.format(context);
+                    },
                   ),
-                  readOnly: true,
-                  onTap: () async {
-                    TimeOfDay? pickedTime = await showTimePicker(
-                      initialTime: TimeOfDay(
-                        hour: _filterDateTime.hour,
-                        minute: _filterDateTime.minute,
-                      ),
-                      context: context,
-                    );
-
-                    if (pickedTime == null) return;
-                    if (!mounted) return;
-
-                    _filterDateTime = _filterDateTime.copyWith(
-                      hour: pickedTime.hour,
-                      minute: pickedTime.minute,
-                    );
-                    _timeController.text = pickedTime.format(context);
-                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           const Spacer(),
           MyFilterButton(
