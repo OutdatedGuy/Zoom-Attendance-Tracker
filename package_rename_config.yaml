@@ -22,7 +22,7 @@ package_rename_config:
 
   web:
     app_name: Zoom Attendance Tracker
-    description: An application to track late attendees in zoom meetings using the participant list csv file.
+    description: An app to track late attendees in zoom meetings using the participant list csv file.
 
   windows:
     app_name: Zoom Attendance Tracker
