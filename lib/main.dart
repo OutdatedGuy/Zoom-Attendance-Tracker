@@ -1,10 +1,17 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 
+// Third Party Packages
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 // Pages
 import 'package:attendance_tracker/pages/HomePage/home_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
+    FlutterNativeSplash.remove();
+  });
+
   runApp(const MyApp());
 }
 

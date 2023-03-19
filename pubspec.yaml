@@ -35,6 +35,7 @@ dependencies:
   file_picker: ^5.2.6
   dotted_border: ^2.0.0+3
   csv: ^5.0.1
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +48,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   package_rename: ^1.1.0
-  flutter_native_splash: ^2.2.19
   flutter_launcher_icons: ^0.12.0
 
 # For information on the generic Dart part of this file, see the
