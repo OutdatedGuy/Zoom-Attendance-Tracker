@@ -53,36 +53,49 @@ List<String> getLateParticipants({
       )
       .toList();
 
-  final onTimeParticipants = waitingRoomData
-      .where(
-        (row) {
-          final formattedDateTime = convertDateFormat(row[joinTimeColumnIndex]);
+  try {
+    final onTimeParticipants = waitingRoomData
+        .where(
+          (row) {
+            final formattedDateTime =
+                convertDateFormat(row[joinTimeColumnIndex]);
 
-          return DateTime.parse(formattedDateTime).compareTo(filterDateTime) <=
-              0;
-        },
-      )
-      .map((e) => e[nameColumnIndex].toString().toLowerCase().trim())
-      .toList();
+            return DateTime.parse(formattedDateTime)
+                    .compareTo(filterDateTime) <=
+                0;
+          },
+        )
+        .map((e) => e[nameColumnIndex].toString().toLowerCase().trim())
+        .toList();
 
-  final lateParticipants = waitingRoomData
-      .where(
-        (row) {
-          final formattedDateTime = convertDateFormat(row[joinTimeColumnIndex]);
+    final lateParticipants = waitingRoomData
+        .where(
+          (row) {
+            final formattedDateTime =
+                convertDateFormat(row[joinTimeColumnIndex]);
 
-          return DateTime.parse(formattedDateTime).compareTo(filterDateTime) >
-              0;
-        },
-      )
-      .map((e) => e[nameColumnIndex].toString().toLowerCase().trim())
-      .toList();
+            return DateTime.parse(formattedDateTime).compareTo(filterDateTime) >
+                0;
+          },
+        )
+        .map((e) => e[nameColumnIndex].toString().toLowerCase().trim())
+        .toList();
 
-  // Remove late participants that are present in onTimeParticipants
-  // as they might have joined the meeting before the filter time
-  // but got disconnected and reconnected after the filter time
-  lateParticipants
-    ..removeWhere((element) => onTimeParticipants.contains(element))
-    ..sort();
+    // Remove late participants that are present in onTimeParticipants
+    // as they might have joined the meeting before the filter time
+    // but got disconnected and reconnected after the filter time
+    lateParticipants
+      ..removeWhere((element) => onTimeParticipants.contains(element))
+      ..sort();
 
-  return lateParticipants.map((e) => e.capitalizeEveryWord()).toSet().toList();
+    return lateParticipants
+        .map((e) => e.capitalizeEveryWord())
+        .toSet()
+        .toList();
+  } on Exception {
+    throw Exception(
+      'Invalid Join Time format. Please make sure that the Join Time column contains '
+      'the date and time in the following format: "MM/dd/yyyy, hh:mm:ss AM/PM"',
+    );
+  }
 }
