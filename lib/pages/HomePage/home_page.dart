@@ -48,13 +48,29 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 35),
           DropTarget(
             onDragDone: (data) async {
-              for (final file in data.files) {
-                if (file.mimeType != 'text/csv') continue;
+              try {
+                for (final file in data.files) {
+                  if ((file.mimeType != null && file.mimeType != 'text/csv') ||
+                      file.name.split('.').last.toLowerCase() != 'csv' ||
+                      file.name.split('.').length == 1) {
+                    continue;
+                  }
 
-                _fileData = await file.readAsBytes();
-                _fileName = file.name;
-                setState(() {});
-                break;
+                  _fileData = await file.readAsBytes();
+                  _fileName = file.name;
+                  setState(() {});
+                  break;
+                }
+              } on Exception {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Invalid input. Please select a valid CSV file.',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
               }
             },
             onDragEntered: (_) => setState(() => _isFileHovered = true),
