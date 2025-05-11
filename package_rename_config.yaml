@@ -1,0 +1,31 @@
+# dart run package_rename
+package_rename_config:
+  android:
+    app_name: Zoom Attendance Tracker
+    package_name: rocks.outdatedguy.zoom_attendance_tracker
+    override_old_package: rocks.outdatedguy.attendance_tracker
+
+  ios:
+    app_name: Zoom Attendance Tracker
+    bundle_name: zoom_tracker
+    package_name: rocks.outdatedguy.zoom-attendance-tracker
+
+  linux:
+    app_name: Zoom Attendance Tracker
+    package_name: rocks.outdatedguy.zoom_attendance_tracker
+    exe_name: zoom-attendance-tracker-linux
+
+  macos:
+    app_name: Zoom Attendance Tracker
+    package_name: rocks.outdatedguy.zoom-attendance-tracker
+    copyright_notice: Copyright ©️ 2023 OutdatedGuy. All rights reserved.
+
+  web:
+    app_name: Zoom Attendance Tracker
+    description: An app to track late attendees in zoom meetings using the participant list csv file.
+
+  windows:
+    app_name: Zoom Attendance Tracker
+    organization: OutdatedGuy
+    copyright_notice: Copyright ©️ 2023 OutdatedGuy. All rights reserved.
+    exe_name: zoom-attendance-tracker-windows

@@ -1,11 +1,11 @@
 {
-    "name": "attendance_tracker",
-    "short_name": "attendance_tracker",
+    "name": "Zoom Attendance Tracker",
+    "short_name": "Zoom Attendance Tracker",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#8C52FF",
+    "theme_color": "#8C52FF",
+    "description": "An app to track late attendees in zoom meetings using the participant list csv file.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

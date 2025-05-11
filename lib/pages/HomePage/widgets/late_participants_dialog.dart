@@ -20,38 +20,50 @@ class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
     return AlertDialog(
       scrollable: true,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Late Participants'),
-          const Spacer(),
+          const Flexible(
+            child: Text(
+              'Late Participants',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
           IconButton(
             onPressed: Navigator.of(context).pop,
             icon: const Icon(Icons.close),
           ),
         ],
       ),
-      content: Text(
-        widget.lateParticipants.map((e) => '• $e').join('\n'),
-        style: const TextStyle(fontSize: 16),
+      content: SizedBox(
+        width: 350,
+        child: SelectableText(
+          widget.lateParticipants.map((e) => '• $e').join('\n'),
+          style: const TextStyle(fontSize: 16),
+        ),
       ),
       actions: [
         TextButton(
+          onPressed: _onCopyPressed,
           child: const Text('Copy'),
-          onPressed: () async {
-            // Copy the list of late participants to the clipboard
-            await Clipboard.setData(
-              ClipboardData(text: widget.lateParticipants.join('\n')),
-            );
-            if (!mounted) return;
-
-            // Show a snackbar to notify the user that the list has been copied
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Copied to clipboard'),
-              ),
-            );
-          },
         ),
       ],
     );
+  }
+
+  void _onCopyPressed() async {
+    final msg = widget.lateParticipants.isEmpty
+        ? '*No Late Participants*'
+        : '*Late Participants:*\n- ${widget.lateParticipants.join('\n- ')}';
+
+    // Copy the list of late participants to the clipboard
+    await Clipboard.setData(ClipboardData(text: msg));
+    if (!mounted) return;
+
+    // Show a snackbar to notify the user that the list has been copied
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(content: Text('Copied to clipboard')),
+      );
   }
 }

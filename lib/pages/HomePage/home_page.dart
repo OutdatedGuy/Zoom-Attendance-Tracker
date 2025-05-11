@@ -15,7 +15,7 @@ import 'widgets/my_filter_button.dart';
 import 'functions/get_late_participants.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,12 +28,12 @@ class _HomePageState extends State<HomePage> {
 
   DateTime _filterDateTime = DateTime.now().copyWith(
     hour: 5,
-    minute: 2,
+    minute: 1,
     second: 0,
     microsecond: 0,
     millisecond: 0,
   );
-  final _timeController = TextEditingController(text: '5:02 AM');
+  final _timeController = TextEditingController(text: '5:01 AM');
   final _dateController = TextEditingController(
     text: DateTime.now().toString().split(' ')[0],
   );
@@ -42,21 +42,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Zoom Attendance Tracker')),
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: <Widget>[
-          Row(),
+          const Row(),
           const SizedBox(height: 35),
           DropTarget(
-            onDragDone: (data) async {
-              for (final file in data.files) {
-                if (file.mimeType != 'text/csv') continue;
-
-                _fileData = await file.readAsBytes();
-                _fileName = file.name;
-                setState(() {});
-                break;
-              }
-            },
+            onDragDone: _onDragDone,
             onDragEntered: (_) => setState(() => _isFileHovered = true),
             onDragExited: (_) => setState(() => _isFileHovered = false),
             child: GestureDetector(
@@ -64,7 +56,9 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 foregroundDecoration: BoxDecoration(
                   color: _isFileHovered
-                      ? Theme.of(context).colorScheme.primary.withOpacity(0.420)
+                      ? Theme.of(context).colorScheme.primary.withValues(
+                            alpha: 0.420,
+                          )
                       : null,
                 ),
                 child: FileNamePreview(filePath: _fileName),
@@ -76,71 +70,60 @@ class _HomePageState extends State<HomePage> {
             onPressed: _selectFile,
             child: const Text('Select File'),
           ),
-          const SizedBox(height: 35),
           const SizedBox(height: 60),
-          Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 50,
-            runSpacing: 50,
-            children: [
-              SizedBox(
-                width: 300,
-                child: TextField(
-                  controller: _dateController,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.date_range),
-                    labelText: "Enter Date",
-                    border: OutlineInputBorder(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 50,
+              runSpacing: 50,
+              children: [
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: _dateController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.date_range),
+                      labelText: "Enter Date",
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: _filterDateTime,
+                        firstDate: DateTime(0000),
+                        lastDate: DateTime(9999),
+                      );
+
+                      if (pickedDate == null) return;
+
+                      _filterDateTime = _filterDateTime.copyWith(
+                        year: pickedDate.year,
+                        month: pickedDate.month,
+                        day: pickedDate.day,
+                      );
+                      _dateController.text =
+                          pickedDate.toString().split(' ')[0];
+                    },
                   ),
-                  readOnly: true,
-                  onTap: () async {
-                    final pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(0000),
-                      lastDate: DateTime(9999),
-                    );
-
-                    if (pickedDate == null) return;
-
-                    _filterDateTime = _filterDateTime.copyWith(
-                      year: pickedDate.year,
-                      month: pickedDate.month,
-                      day: pickedDate.day,
-                    );
-                    _dateController.text = pickedDate.toString().split(' ')[0];
-                  },
                 ),
-              ),
-              SizedBox(
-                width: 300,
-                child: TextField(
-                  controller: _timeController,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.timer),
-                    labelText: "Enter Time",
-                    border: OutlineInputBorder(),
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: _timeController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.timer),
+                      labelText: "Enter Time",
+                      border: OutlineInputBorder(),
+                    ),
+                    readOnly: true,
+                    onTap: _onEnterTimePressed,
                   ),
-                  readOnly: true,
-                  onTap: () async {
-                    TimeOfDay? pickedTime = await showTimePicker(
-                      initialTime: const TimeOfDay(hour: 5, minute: 2),
-                      context: context,
-                    );
-
-                    if (pickedTime == null) return;
-                    if (!mounted) return;
-
-                    _filterDateTime = _filterDateTime.copyWith(
-                      hour: pickedTime.hour,
-                      minute: pickedTime.minute,
-                    );
-                    _timeController.text = pickedTime.format(context);
-                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           const Spacer(),
           MyFilterButton(
@@ -151,37 +134,112 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _selectFile() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['csv'],
-      lockParentWindow: true,
-      withData: true,
+  void _onDragDone(DropDoneDetails data) async {
+    try {
+      for (final file in data.files) {
+        if ((file.mimeType != null && file.mimeType != 'text/csv') ||
+            file.name.split('.').last.toLowerCase() != 'csv' ||
+            file.name.split('.').length == 1) {
+          continue;
+        }
+
+        _fileData = await file.readAsBytes();
+        _fileName = file.name;
+        setState(() {});
+        break;
+      }
+    } on Exception {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Invalid input. Please select a valid CSV file.',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  void _onEnterTimePressed() async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      initialTime: TimeOfDay(
+        hour: _filterDateTime.hour,
+        minute: _filterDateTime.minute,
+      ),
+      context: context,
     );
 
-    if (result == null || result.files.single.extension != 'csv') return;
+    if (pickedTime == null) return;
+    if (!mounted) return;
 
-    _fileData = result.files.single.bytes;
-    _fileName = result.files.single.name;
-    setState(() {});
+    _filterDateTime = _filterDateTime.copyWith(
+      hour: pickedTime.hour,
+      minute: pickedTime.minute,
+    );
+    _timeController.text = pickedTime.format(context);
+  }
+
+  void _selectFile() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['csv'],
+        lockParentWindow: true,
+        withData: true,
+      );
+
+      if (result == null || result.files.single.extension != 'csv') return;
+
+      _fileData = result.files.single.bytes;
+      _fileName = result.files.single.name;
+      setState(() {});
+    } on PlatformException catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.message ?? 'An error occurred. Please try again.',
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   void _getLateParticipants() {
-    final lateParticipants = getLateParticipants(
-      fileData: _fileData!,
-      filterDateTime: _filterDateTime,
-    );
+    try {
+      final lateParticipants = getLateParticipants(
+        fileData: _fileData!,
+        filterDateTime: _filterDateTime,
+      );
 
-    // Show a dialog with the late participants
-    // Keep the dialog open until the user closes it
-    // The dialog should have a button to copy the list of late participants
-    showDialog(
-      context: context,
-      builder: (context) => LateParticipantsDialog(
-        lateParticipants: lateParticipants,
-      ),
-      barrierDismissible: false,
-    );
+      // Show a dialog with the late participants
+      // Keep the dialog open until the user closes it
+      // The dialog should have a button to copy the list of late participants
+      showDialog(
+        context: context,
+        builder: (context) => LateParticipantsDialog(
+          lateParticipants: lateParticipants,
+        ),
+        barrierDismissible: false,
+      );
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString().split('Exception: ')[1],
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 6),
+        ),
+      );
+    }
   }
 
   @override

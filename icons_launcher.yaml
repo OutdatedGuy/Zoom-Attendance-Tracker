@@ -1,0 +1,21 @@
+# dart run icons_launcher:create
+icons_launcher:
+  image_path: "assets/app_logo.png"
+  platforms:
+    android:
+      enable: true
+      adaptive_background_color: '#F47117'
+      adaptive_foreground_image: "assets/adaptive_icon_foreground.png"
+      adaptive_monochrome_image: "assets/adaptive_icon_monochrome.png"
+    ios:
+      enable: true
+    web:
+      enable: true
+      favicon_path: "assets/web_logo.png"
+    macos:
+      enable: true
+      image_path: "assets/macOS_logo.png"
+    windows:
+      enable: true
+    linux:
+      enable: true

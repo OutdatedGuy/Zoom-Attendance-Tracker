@@ -1,6 +1,6 @@
 # attendance_tracker
 
-A new Flutter project.
+An app to track late attendees in zoom meetings using the participant list csv file.
 
 ## Getting Started
 

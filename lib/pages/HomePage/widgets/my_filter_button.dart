@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 class MyFilterButton extends StatelessWidget {
   const MyFilterButton({
-    Key? key,
+    super.key,
     required bool hidden,
     required VoidCallback onPressed,
   })  : _hidden = hidden,
-        _onPressed = onPressed,
-        super(key: key);
+        _onPressed = onPressed;
 
   final bool _hidden;
   final VoidCallback _onPressed;
