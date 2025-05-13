@@ -3,6 +3,10 @@ clear &&
 flutter clean &&
 flutter pub get &&
 
+cd ios &&
+pod install --repo-update &&
+cd .. &&
+
 flutter build ipa --release &&
 
 rm -f "installers/ios/Zoom Attendance Tracker.ipa" &&
