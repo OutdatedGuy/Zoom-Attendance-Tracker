@@ -1,0 +1,62 @@
+{
+  "fill" : {
+    "automatic-gradient" : "display-p3:0.95686,0.44314,0.09020,1.00000"
+  },
+  "groups" : [
+    {
+      "hidden" : false,
+      "layers" : [
+        {
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "Zoom.png",
+          "name" : "Zoom",
+          "position" : {
+            "scale" : 0.9,
+            "translation-in-points" : [
+              58.87237687458602,
+              24.10529885417072
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "blend-mode" : "normal",
+      "hidden" : false,
+      "layers" : [
+        {
+          "fill" : "automatic",
+          "image-name" : "5amClub.svg",
+          "name" : "5amClub",
+          "position" : {
+            "scale" : 0.9,
+            "translation-in-points" : [
+              28.927545881871644,
+              22.898720899014283
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}
