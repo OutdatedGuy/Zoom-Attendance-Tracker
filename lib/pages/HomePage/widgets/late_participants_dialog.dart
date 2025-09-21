@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Widgets
+import 'adaptive_action.dart';
+
 class LateParticipantsDialog extends StatefulWidget {
   const LateParticipantsDialog({super.key, required this.lateParticipants});
 
@@ -14,7 +17,7 @@ class LateParticipantsDialog extends StatefulWidget {
 class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return AlertDialog.adaptive(
       scrollable: true,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,10 +39,11 @@ class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
         child: SelectableText(
           widget.lateParticipants.map((e) => '• $e').join('\n'),
           style: const TextStyle(fontSize: 16),
+          textAlign: TextAlign.left,
         ),
       ),
       actions: [
-        TextButton(onPressed: _onCopyPressed, child: const Text('Copy')),
+        AdaptiveAction(onPressed: _onCopyPressed, child: const Text('Copy')),
       ],
     );
   }

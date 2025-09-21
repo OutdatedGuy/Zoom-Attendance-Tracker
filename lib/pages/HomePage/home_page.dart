@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
       // Show a dialog with the late participants
       // Keep the dialog open until the user closes it
       // The dialog should have a button to copy the list of late participants
-      showDialog(
+      showAdaptiveDialog(
         context: context,
         builder: (context) {
           return LateParticipantsDialog(lateParticipants: lateParticipants);
