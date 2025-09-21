@@ -22,7 +22,7 @@ class FileNamePreview extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.8,
         constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
         color: filePath != null
-            ? Theme.of(context).brightness == Brightness.dark
+            ? Theme.brightnessOf(context) == Brightness.dark
                   ? Colors.black87
                   : Colors.white70
             : null,

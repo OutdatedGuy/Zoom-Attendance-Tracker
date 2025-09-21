@@ -45,9 +45,11 @@ List<String> getLateParticipants({
     return RegExp('In Waiting Room', caseSensitive: false).hasMatch(element);
   });
 
-  if (nameColumnIndex == -1 ||
-      joinTimeColumnIndex == -1 ||
-      waitRoomColumnIndex == -1) {
+  if ([
+    nameColumnIndex,
+    joinTimeColumnIndex,
+    waitRoomColumnIndex,
+  ].contains(-1)) {
     throw Exception(
       'Invalid CSV file. Please make sure that the CSV file contains the following columns: '
       '"Name (Original Name)", "Join Time", "In Waiting Room"',

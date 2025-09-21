@@ -13,9 +13,8 @@ import 'package:window_size/window_size.dart';
 import 'package:attendance_tracker/pages/HomePage/home_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) {
-    FlutterNativeSplash.remove();
-  });
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.remove();
 
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     setWindowMinSize(const Size(400, 900));

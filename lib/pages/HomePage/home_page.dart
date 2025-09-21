@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   );
   final _timeController = TextEditingController(text: '5:01 AM');
   final _dateController = TextEditingController(
-    text: DateTime.now().toString().split(' ')[0],
+    text: DateTime.now().toString().split(' ').first,
   );
 
   @override
@@ -89,25 +89,7 @@ class _HomePageState extends State<HomePage> {
                       border: OutlineInputBorder(),
                     ),
                     readOnly: true,
-                    onTap: () async {
-                      final pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: _filterDateTime,
-                        firstDate: DateTime(0000),
-                        lastDate: DateTime(9999),
-                      );
-
-                      if (pickedDate == null) return;
-
-                      _filterDateTime = _filterDateTime.copyWith(
-                        year: pickedDate.year,
-                        month: pickedDate.month,
-                        day: pickedDate.day,
-                      );
-                      _dateController.text = pickedDate.toString().split(
-                        ' ',
-                      )[0];
-                    },
+                    onTap: _onEnterDatePressed,
                   ),
                 ),
                 SizedBox(
@@ -164,6 +146,24 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
+  }
+
+  void _onEnterDatePressed() async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _filterDateTime,
+      firstDate: DateTime(0000),
+      lastDate: DateTime(9999),
+    );
+
+    if (pickedDate == null) return;
+
+    _filterDateTime = _filterDateTime.copyWith(
+      year: pickedDate.year,
+      month: pickedDate.month,
+      day: pickedDate.day,
+    );
+    _dateController.text = pickedDate.toString().split(' ').first;
   }
 
   void _onEnterTimePressed() async {
