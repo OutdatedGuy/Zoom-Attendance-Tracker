@@ -12,20 +12,24 @@ class FileNamePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-      options: RectDottedBorderOptions(
+      options: RoundedRectDottedBorderOptions(
+        radius: const Radius.circular(12),
         color: Theme.of(context).colorScheme.primary,
         strokeWidth: 2,
         strokeCap: StrokeCap.round,
-        dashPattern: filePath == null ? [6.9] : [1],
+        dashPattern: filePath == null ? [6.9] : [1000, 0],
       ),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.8,
         constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
-        color: filePath != null
-            ? Theme.brightnessOf(context) == Brightness.dark
-                  ? Colors.black87
-                  : Colors.white70
-            : null,
+        decoration: BoxDecoration(
+          color: filePath != null
+              ? Theme.brightnessOf(context) == Brightness.dark
+                    ? Colors.black87
+                    : Colors.white70
+              : null,
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: Center(

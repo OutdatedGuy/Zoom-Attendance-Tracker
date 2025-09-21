@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
                           context,
                         ).colorScheme.primary.withValues(alpha: 0.420)
                       : null,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: FileNamePreview(filePath: _fileName),
               ),
