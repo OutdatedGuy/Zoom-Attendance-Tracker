@@ -56,9 +56,9 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 foregroundDecoration: BoxDecoration(
                   color: _isFileHovered
-                      ? Theme.of(context).colorScheme.primary.withValues(
-                            alpha: 0.420,
-                          )
+                      ? Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.420)
                       : null,
                 ),
                 child: FileNamePreview(filePath: _fileName),
@@ -104,8 +104,9 @@ class _HomePageState extends State<HomePage> {
                         month: pickedDate.month,
                         day: pickedDate.day,
                       );
-                      _dateController.text =
-                          pickedDate.toString().split(' ')[0];
+                      _dateController.text = pickedDate.toString().split(
+                        ' ',
+                      )[0];
                     },
                   ),
                 ),
@@ -127,7 +128,9 @@ class _HomePageState extends State<HomePage> {
           ),
           const Spacer(),
           MyFilterButton(
-              hidden: _fileName == null, onPressed: _getLateParticipants),
+            hidden: _fileName == null,
+            onPressed: _getLateParticipants,
+          ),
           const Spacer(),
         ],
       ),
@@ -223,9 +226,9 @@ class _HomePageState extends State<HomePage> {
       // The dialog should have a button to copy the list of late participants
       showDialog(
         context: context,
-        builder: (context) => LateParticipantsDialog(
-          lateParticipants: lateParticipants,
-        ),
+        builder: (context) {
+          return LateParticipantsDialog(lateParticipants: lateParticipants);
+        },
         barrierDismissible: false,
       );
     } on Exception catch (e) {

@@ -6,8 +6,8 @@ class MyFilterButton extends StatelessWidget {
     super.key,
     required bool hidden,
     required VoidCallback onPressed,
-  })  : _hidden = hidden,
-        _onPressed = onPressed;
+  }) : _hidden = hidden,
+       _onPressed = onPressed;
 
   final bool _hidden;
   final VoidCallback _onPressed;

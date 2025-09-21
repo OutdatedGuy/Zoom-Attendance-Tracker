@@ -32,21 +32,18 @@ List<String> getLateParticipants({
   const csvConverter = CsvToListConverter();
   final parsedCsv = csvConverter.convert(decodedCsv);
 
-  final nameColumnIndex = parsedCsv[0].indexWhere(
-    (element) {
-      return RegExp(r'Name \(Original Name\)', caseSensitive: false).hasMatch(
-        element,
-      );
-    },
-  );
+  final nameColumnIndex = parsedCsv[0].indexWhere((element) {
+    return RegExp(
+      r'Name \(Original Name\)',
+      caseSensitive: false,
+    ).hasMatch(element);
+  });
   final joinTimeColumnIndex = parsedCsv[0].indexWhere(
     (element) => RegExp('Join Time', caseSensitive: false).hasMatch(element),
   );
-  final waitRoomColumnIndex = parsedCsv[0].indexWhere(
-    (element) => RegExp('In Waiting Room', caseSensitive: false).hasMatch(
-      element,
-    ),
-  );
+  final waitRoomColumnIndex = parsedCsv[0].indexWhere((element) {
+    return RegExp('In Waiting Room', caseSensitive: false).hasMatch(element);
+  });
 
   if (nameColumnIndex == -1 ||
       joinTimeColumnIndex == -1 ||
@@ -60,36 +57,27 @@ List<String> getLateParticipants({
   parsedCsv.removeAt(0);
 
   final waitingRoomData = parsedCsv
-      .where(
-        (row) => row[waitRoomColumnIndex] == 'Yes',
-      )
+      .where((row) => row[waitRoomColumnIndex] == 'Yes')
       .toList();
 
   try {
     final onTimeParticipants = waitingRoomData
-        .where(
-          (row) {
-            final formattedDateTime =
-                convertDateFormat(row[joinTimeColumnIndex]);
+        .where((row) {
+          final formattedDateTime = convertDateFormat(row[joinTimeColumnIndex]);
 
-            return DateTime.parse(formattedDateTime)
-                    .compareTo(filterDateTime) <=
-                0;
-          },
-        )
+          return DateTime.parse(formattedDateTime).compareTo(filterDateTime) <=
+              0;
+        })
         .map((e) => e[nameColumnIndex].toString().toLowerCase().trim())
         .toList();
 
     final lateParticipants = waitingRoomData
-        .where(
-          (row) {
-            final formattedDateTime =
-                convertDateFormat(row[joinTimeColumnIndex]);
+        .where((row) {
+          final formattedDateTime = convertDateFormat(row[joinTimeColumnIndex]);
 
-            return DateTime.parse(formattedDateTime).compareTo(filterDateTime) >
-                0;
-          },
-        )
+          return DateTime.parse(formattedDateTime).compareTo(filterDateTime) >
+              0;
+        })
         .map((e) => e[nameColumnIndex].toString().toLowerCase().trim())
         .toList();
 

@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class FileNamePreview extends StatelessWidget {
-  const FileNamePreview({
-    super.key,
-    required this.filePath,
-  });
+  const FileNamePreview({super.key, required this.filePath});
 
   final String? filePath;
 
@@ -26,8 +23,8 @@ class FileNamePreview extends StatelessWidget {
         constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
         color: filePath != null
             ? Theme.of(context).brightness == Brightness.dark
-                ? Colors.black87
-                : Colors.white70
+                  ? Colors.black87
+                  : Colors.white70
             : null,
         child: AspectRatio(
           aspectRatio: 16 / 9,

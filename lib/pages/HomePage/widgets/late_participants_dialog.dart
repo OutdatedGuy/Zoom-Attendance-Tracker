@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class LateParticipantsDialog extends StatefulWidget {
-  const LateParticipantsDialog({
-    super.key,
-    required this.lateParticipants,
-  });
+  const LateParticipantsDialog({super.key, required this.lateParticipants});
 
   final List<String> lateParticipants;
 
@@ -42,10 +39,7 @@ class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: _onCopyPressed,
-          child: const Text('Copy'),
-        ),
+        TextButton(onPressed: _onCopyPressed, child: const Text('Copy')),
       ],
     );
   }
@@ -62,8 +56,6 @@ class _LateParticipantsDialogState extends State<LateParticipantsDialog> {
     // Show a snackbar to notify the user that the list has been copied
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(content: Text('Copied to clipboard')),
-      );
+      ..showSnackBar(const SnackBar(content: Text('Copied to clipboard')));
   }
 }
