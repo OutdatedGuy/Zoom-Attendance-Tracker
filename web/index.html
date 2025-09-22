@@ -52,6 +52,10 @@
     <title>Zoom Attendance Tracker</title>
     <link rel="manifest" href="manifest.json" />
 
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
     <style id="splash-screen-style">
       html {
         height: 100%;
@@ -115,7 +119,7 @@
 
       @media (prefers-color-scheme: dark) {
         body {
-          background-color: #f47117;
+          background-color: #1e1e1e;
         }
       }
     </style>
@@ -128,10 +132,6 @@
         document.getElementById("splash-screen-script")?.remove();
       }
     </script>
-    <meta
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-      name="viewport"
-    />
   </head>
   <body>
     <picture id="splash-branding">
@@ -186,6 +186,7 @@
         alt=""
       />
     </picture>
+
     <script src="flutter_bootstrap.js" async=""></script>
   </body>
 </html>
