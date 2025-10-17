@@ -1,0 +1,208 @@
+/* Zoom Attendance Tracker Web Minimal Styles */
+:root {
+  --bg: #0f1115;
+  --card: #171a21;
+  --text: #e6eaf2;
+  --muted: #9aa4b2;
+  --brand: #f47117;
+  --accent: #8c52ff;
+  /* Default link color (dark mode) - brighter for better legibility */
+  --link: #b794f6;
+  --danger: #ff6b6b;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #0f1115;
+    --muted: #556070;
+    --brand: #f47117;
+    --accent: #8c52ff;
+    /* Link color in light mode */
+    --link: #8c52ff;
+    --danger: #e5484d;
+    --shadow: 0 10px 30px rgba(10, 20, 30, 0.08);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: radial-gradient(
+      1200px 800px at 10% -10%,
+      rgba(244, 113, 23, 0.08),
+      transparent
+    ),
+    radial-gradient(
+      1000px 700px at 100% 0%,
+      rgba(140, 82, 255, 0.08),
+      transparent
+    ),
+    var(--bg);
+  color: var(--text);
+  font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.container {
+  max-width: 860px;
+  padding: 32px 20px 80px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px color-mix(in oklab, var(--brand) 25%, transparent);
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+}
+
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.85;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.nav a:hover {
+  background: color-mix(in oklab, var(--brand) 12%, transparent);
+}
+
+.card {
+  margin-top: 24px;
+  background: color-mix(in oklab, var(--card) 96%, transparent);
+  border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 34px;
+  margin: 4px 0 8px;
+}
+h2 {
+  font-size: 24px;
+  margin: 18px 0 10px;
+}
+h3 {
+  font-size: 18px;
+  margin: 14px 0 8px;
+}
+
+p {
+  margin: 10px 0;
+  color: var(--text);
+}
+small,
+.muted {
+  color: var(--muted);
+}
+
+/* Content links (exclude CTA buttons and nav links) */
+.card a:not(.cta) {
+  color: var(--link);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.card a:not(.cta):hover {
+  text-decoration-thickness: 2px;
+  filter: brightness(1.05);
+}
+
+.card a:not(.cta):focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--link) 70%, transparent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.list {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+}
+.list li {
+  margin: 6px 0;
+}
+
+.kbd {
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in oklab, var(--text) 20%, transparent);
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+}
+
+.footer {
+  margin-top: 32px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent);
+}
+
+.cta:hover {
+  background: color-mix(in oklab, var(--brand) 12%, transparent);
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 16px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  .card {
+    padding: 22px;
+  }
+}
