@@ -8,16 +8,8 @@
       "layers" : [
         {
           "glass" : true,
-          "hidden" : false,
           "image-name" : "Zoom.png",
-          "name" : "Zoom",
-          "position" : {
-            "scale" : 0.9,
-            "translation-in-points" : [
-              58.87237687458602,
-              24.10529885417072
-            ]
-          }
+          "name" : "Zoom"
         }
       ],
       "shadow" : {
@@ -34,16 +26,8 @@
       "hidden" : false,
       "layers" : [
         {
-          "fill" : "automatic",
           "image-name" : "5amClub.svg",
-          "name" : "5amClub",
-          "position" : {
-            "scale" : 0.9,
-            "translation-in-points" : [
-              28.927545881871644,
-              22.898720899014283
-            ]
-          }
+          "name" : "5amClub"
         }
       ],
       "shadow" : {
