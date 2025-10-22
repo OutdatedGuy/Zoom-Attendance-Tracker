@@ -1,6 +1,6 @@
 {
-    "name": "Zoom Attendance Tracker",
-    "short_name": "Zoom Attendance Tracker",
+    "name": "Attendance Tracker for Zoom",
+    "short_name": "Attendance Tracker for Zoom",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#8C52FF",

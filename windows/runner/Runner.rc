@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "OutdatedGuy" "\0"
-            VALUE "FileDescription", "Zoom Attendance Tracker" "\0"
+            VALUE "FileDescription", "Attendance Tracker for Zoom" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Zoom Attendance Tracker" "\0"
+            VALUE "InternalName", "Attendance Tracker for Zoom" "\0"
             VALUE "LegalCopyright", "Copyright ©️ 2023 OutdatedGuy. All rights reserved." "\0"
-            VALUE "OriginalFilename", "zoom-attendance-tracker-windows.exe" "\0"
-            VALUE "ProductName", "Zoom Attendance Tracker" "\0"
+            VALUE "OriginalFilename", "attendance-tracker-for-zoom-windows.exe" "\0"
+            VALUE "ProductName", "Attendance Tracker for Zoom" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

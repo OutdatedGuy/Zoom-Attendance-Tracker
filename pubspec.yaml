@@ -90,7 +90,7 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 msix_config:
-  display_name: Zoom Attendance Tracker
+  display_name: Attendance Tracker for Zoom
   publisher_display_name: OutdatedGuy
   identity_name: rocks.outdatedguy.zoom-attendance-tracker
   logo_path: ./installers/msix_creator/installer_logo.png

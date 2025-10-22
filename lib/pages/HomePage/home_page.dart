@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Zoom Attendance Tracker')),
+      appBar: AppBar(title: const Text('Attendance Tracker for Zoom')),
       resizeToAvoidBottomInset: false,
       body: Column(
         children: <Widget>[

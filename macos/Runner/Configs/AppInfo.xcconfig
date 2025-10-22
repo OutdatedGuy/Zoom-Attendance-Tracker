@@ -5,7 +5,7 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = Zoom Attendance Tracker
+PRODUCT_NAME = Attendance Tracker for Zoom
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = rocks.outdatedguy.zoom-attendance-tracker
