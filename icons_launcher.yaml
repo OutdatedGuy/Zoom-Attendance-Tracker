@@ -17,5 +17,6 @@ icons_launcher:
       image_path: "assets/macOS_logo.png"
     windows:
       enable: true
+      image_path: "assets/windows_logo.png"
     linux:
       enable: true

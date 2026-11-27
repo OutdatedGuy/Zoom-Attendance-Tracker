@@ -91,10 +91,12 @@ flutter:
 
 msix_config:
   display_name: Attendance Tracker for Zoom
-  publisher_display_name: OutdatedGuy
-  identity_name: rocks.outdatedguy.zoom-attendance-tracker
-  logo_path: ./installers/msix_creator/installer_logo.png
+  publisher_display_name: OriginLabs
+  identity_name: OriginLabs.AttendanceTrackerforZoom
+  publisher: CN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+  logo_path: installers/msix_creator/installer_logo.png
+  store: true
   trim_logo: false
-  icons_background_color: "#F47117"
+  icons_background_color: transparent
   output_path: installers/msix_creator/dist/
-  output_name: ZAT Installer
+  output_name: ZAT_Installer

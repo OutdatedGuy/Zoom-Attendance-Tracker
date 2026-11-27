@@ -26,6 +26,6 @@ package_rename_config:
 
   windows:
     app_name: Attendance Tracker for Zoom
-    organization: OutdatedGuy
+    organization: OriginLabs
     copyright_notice: Copyright ©️ 2023 OutdatedGuy. All rights reserved.
-    exe_name: attendance-tracker-for-zoom-windows
+    exe_name: AttendanceTrackerForZoom
