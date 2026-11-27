@@ -28,9 +28,7 @@ List<String> getLateParticipants({
 }) {
   // Decode the CSV data from the Uint8List
   final decodedCsv = utf8.decode(fileData);
-  // Use the CsvToListConverter from the csv package to parse the CSV data
-  const csvConverter = CsvToListConverter();
-  final parsedCsv = csvConverter.convert(decodedCsv);
+  final parsedCsv = csv.decode(decodedCsv);
 
   final nameColumnIndex = parsedCsv[0].indexWhere((element) {
     return RegExp(

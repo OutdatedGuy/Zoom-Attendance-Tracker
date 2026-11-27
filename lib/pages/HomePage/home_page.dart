@@ -1,5 +1,5 @@
 // Flutter Packages
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 // Third Party Packages
@@ -41,7 +41,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Attendance Tracker for Zoom')),
+      appBar: AppBar(
+        title: const Text('Attendance Tracker for Zoom'),
+        centerTitle: true,
+      ),
       resizeToAvoidBottomInset: false,
       body: Column(
         children: <Widget>[
@@ -188,17 +191,17 @@ class _HomePageState extends State<HomePage> {
 
   void _selectFile() async {
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final result = await FilePicker.pickFile(
         type: FileType.custom,
         allowedExtensions: ['csv'],
-        lockParentWindow: true,
-        withData: true,
+        windowsOptions: WindowsOptions(lockParentWindow: true),
+        linuxOptions: LinuxOptions(lockParentWindow: true),
       );
 
-      if (result == null || result.files.single.extension != 'csv') return;
+      if (result == null || result.extension != 'csv') return;
 
-      _fileData = result.files.single.bytes;
-      _fileName = result.files.single.name;
+      _fileName = result.name;
+      _fileData = await result.readAsBytes();
       setState(() {});
     } on PlatformException catch (e) {
       if (!mounted) return;
